@@ -65,7 +65,11 @@ public:
         int index = front[m-1];
         // Step 2: front ko aage badhao.
         front[m-1] = next[index];
-        // Step 3: freeSlots ko manage karo.
+        // Step 3: Check if the queue become empty.
+        if(front[m-1] == -1){
+            rear[m-1] = -1;
+        }
+        // Step 4: freeSlots ko manage karo.
         next[index] = freespot;
         freespot = index;
 
