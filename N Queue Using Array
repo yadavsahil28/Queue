@@ -33,25 +33,25 @@ public:
     // Enqueues 'X' into the Mth queue. Returns true if it gets pushed into the queue, and false otherwise.
     bool enqueue(int x, int m){
         // Write your code here.
+        // Overflow
         if(freespot == -1) return false;
 
-        // Step 1: Find the freeSpace.
+        // Step 1: find first free index.
         int index = freespot;
         arr[index] = x;
-        // Step 2: Update the freeSpace with the next freeSpace.
+        // Step 2: update freespot.
         freespot = next[index];
-        // Step 3: Update the front and rear of the queue.
-        // check if the queue is empty.
+        // Step 3: check whether first element.
         if(front[m-1] == -1){
             front[m-1] = index;
-            rear[m-1] = index;
-        } // If Queue is not empty only update rear.
-        else{
+        } 
+        else{//link new element to the prev element
             next[rear[m-1]] = index;
-            rear[m-1] = index;
         }
         // Step 4: Update the next
         next[index] = -1;
+        // Step 5: update rear
+        rear[m-1] = index;
 
         return true;
     }
@@ -61,15 +61,11 @@ public:
         // Write your code here.
         // Check Underflow conditions.
         if(front[m-1] == -1) return -1;
-        // Step 1: Find the front index of the queue.
+        // Step 1: find index to pop.
         int index = front[m-1];
-        // Step 2: Update the front with the next front value in the queue.
+        // Step 2: front ko aage badhao.
         front[m-1] = next[index];
-        // Step 3: Check if the queue become empty.
-        if(front[m-1] == -1){
-            rear[m-1] = -1;
-        }
-        // Step 4: Update the new freeSpace and next.
+        // Step 3: freeSlots ko manage karo.
         next[index] = freespot;
         freespot = index;
 
