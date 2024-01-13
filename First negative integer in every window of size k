@@ -8,13 +8,13 @@ vector<long long> printFirstNegativeInteger(long long int A[],
             q.push_back(i);
         }
     }
+    if(!q.empty()){
+        ans.push_back(A[q.front()]);
+    }
+    else{
+        ans.push_back(0);
+    }
     for(int i=K; i<N; i++){
-        if(!q.empty()){
-            ans.push_back(A[q.front()]);
-        }
-        else{
-            ans.push_back(0);
-        }
         
         if((!q.empty()) && q.front() < i-K+1){
             q.pop_front(); 
@@ -23,12 +23,14 @@ vector<long long> printFirstNegativeInteger(long long int A[],
         if(A[i] < 0){
             q.push_back(i);
         }
+        
+        if(!q.empty()){
+            ans.push_back(A[q.front()]);
+        }
+        else{
+            ans.push_back(0);
+        }
     }
-    if(!q.empty()){
-        ans.push_back(A[q.front()]);
-    }
-    else{
-        ans.push_back(0);
-    }
+    
     return ans;
  }
